@@ -12,7 +12,7 @@ public enum UserType {
         this.name = text;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
