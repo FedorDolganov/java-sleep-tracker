@@ -1,9 +1,7 @@
 package ru.yandex.practicum.sleeptracker.Functions;
 
 import ru.yandex.practicum.sleeptracker.SleepDaySession;
-import ru.yandex.practicum.sleeptracker.SleepDaySessionType;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.function.Function;
 

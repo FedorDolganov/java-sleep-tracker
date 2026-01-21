@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.LinkedList;
 
 public class SleepingSession {

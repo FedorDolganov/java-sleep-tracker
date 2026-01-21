@@ -5,8 +5,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import ru.yandex.practicum.sleeptracker.Functions.*;
 
-import java.util.Scanner;
-
 public class SleepTrackerAppTest {
 
     static SleepingSession sleepingSessionN1, sleepingSessionN2, sleepingSessionN3, sleepingSessionN4;
