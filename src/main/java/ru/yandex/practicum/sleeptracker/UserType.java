@@ -8,8 +8,12 @@ public enum UserType {
 
     private String name;
 
-    UserType(String text) {this.name = text;}
+    UserType(String text) {
+        this.name = text;
+    }
 
-    public String getName(){return this.name;}
+    public String getName(){
+        return this.name;
+    }
 
 }
