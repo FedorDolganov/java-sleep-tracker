@@ -4,21 +4,26 @@ import ru.yandex.practicum.sleeptracker.Functions.*;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class SleepTrackerApp {
 
     private static LinkedHashMap<Function<LinkedList<SleepDaySession>, Integer>, SleepAnalysisResult> statFunctions;
+    private static List<String> formatedMessages;
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Введите путь к файлу с логом сна:");
+        if (args.length == 0) {
+            System.out.println("Укажите путь к файлу с логом сна в аргументах запуска.");
+            return;
+        }
 
-        String filePath = scanner.nextLine();
+        String filePath = args[0];
 
         SleepingSession sleepingSession = new SleepingSession(filePath);
 
         statFunctions = new LinkedHashMap<>();
+        formatedMessages = new ArrayList<>();
 
         statFunctions.put(new GetCountSession(), new SleepAnalysisResult("Кол-во сессий сна: %result%"));
         statFunctions.put(new GetSessionMinimal(), new SleepAnalysisResult("Минимальная продолжительность сессии (мин): %result%"));
@@ -27,9 +32,10 @@ public class SleepTrackerApp {
         statFunctions.put(new GetCountBadSession(), new SleepAnalysisResult("Кол-во сессий с плохим качеством сна: %result%"));
         statFunctions.put(new GetSessionSleepless(), new SleepAnalysisResult("Кол-во бессоных ночей: %result%"));
 
-        for (Function<LinkedList<SleepDaySession>, Integer> function : statFunctions.keySet()) {
-            System.out.println(statFunctions.get(function).getFormattedMessage(function.apply(sleepingSession.getDaySessions())));
-        }
+        formatedMessages = statFunctions.keySet().stream()
+                .map(function -> statFunctions.get(function).getFormattedMessage(function.apply(sleepingSession.getDaySessions())))
+                .peek(System.out::println)
+                .collect(Collectors.toList());
 
         GetUserType userType = new GetUserType();
         SleepAnalysisResult userTypeFormatter = new SleepAnalysisResult("Тип пользователя: %result%");
