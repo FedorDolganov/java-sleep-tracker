@@ -35,7 +35,7 @@ public class SleepTrackerApp {
         formatedMessages = statFunctions.keySet().stream()
                 .map(function -> statFunctions.get(function).getFormattedMessage(function.apply(sleepingSession.getDaySessions())))
                 .peek(System.out::println)
-                .collect(Collectors.toList());
+                .toList();
 
         GetUserType userType = new GetUserType();
         SleepAnalysisResult userTypeFormatter = new SleepAnalysisResult("Тип пользователя: %result%");

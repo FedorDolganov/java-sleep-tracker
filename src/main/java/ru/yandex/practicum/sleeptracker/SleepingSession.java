@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class SleepingSession {
 
@@ -16,17 +18,19 @@ public class SleepingSession {
     public SleepingSession(String filePath) {
         this.logFile = new File(filePath);
         this.dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
-        this.daySessions = new LinkedList<>();
 
         generateDaySession();
     }
 
     private void generateDaySession() {
         try (BufferedReader reader = new BufferedReader(new FileReader(logFile))) {
-            daySessions = (LinkedList<SleepDaySession>) reader.lines()
+            List<SleepDaySession> rawDaySessions = new ArrayList<>();
+
+            rawDaySessions = reader.lines()
                     .map(this::convertToSession)
                     .toList();
 
+            daySessions = new LinkedList<>(rawDaySessions);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
